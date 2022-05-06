@@ -17,9 +17,12 @@ use CortexPE\DiscordWebhookAPI\Embed;
 
 class Main extends PluginBase implements Listener {
   
+  public $api;
+  
   public function onEnable() : void{
     $this->saveResource("config.yml");
     $this->getLogger()->info("Plugin Enabled!");
+    $api = $this->getServer()->getPluginManager()->getPlugin("PurePerms");
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
   
