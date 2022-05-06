@@ -31,18 +31,21 @@ namespace CortexPE\DiscordWebhookAPI\task;
 
 use CortexPE\DiscordWebhookAPI\Message;
 use CortexPE\DiscordWebhookAPI\Webhook;
+use AxelFeL\CTD\Main;
 use pocketmine\scheduler\AsyncTask;
-use pocketmine\Server;
 
 class DiscordWebhookSendTask extends AsyncTask {
 	/** @var Webhook */
 	protected $webhook;
 	/** @var Message */
 	protected $message;
+        /** @var Main */
+        protected $plugin
 
-	public function __construct(Webhook $webhook, Message $message){
+	public function __construct(Webhook $webhook, Message $message, Main $plugin){
 		$this->webhook = $webhook;
 		$this->message = $message;
+                $this->main = $plugin;
 	}
 
 	public function onRun() : void {
@@ -60,7 +63,7 @@ class DiscordWebhookSendTask extends AsyncTask {
 	public function onCompletion() : void {
 		$response = $this->getResult();
 		if(!in_array($response[1], [200, 204])){
-			$this->getServer()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
+			$this->plugin->getServer()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
 		}
 	}
 }
