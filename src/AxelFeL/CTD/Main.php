@@ -71,7 +71,6 @@ class Main extends PluginBase implements Listener {
   
   //Code from PurePermsScore
   public function getPlayerRank(Player $player): string{
-      $api = $this->getServer()->getPluginManager()->getPlugin("PurePerms");
       $group = $api->getUserDataMgr()->getData($player)["group"];
 
       return $group ?? "No Rank";
