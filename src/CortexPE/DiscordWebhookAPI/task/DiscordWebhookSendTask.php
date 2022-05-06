@@ -57,10 +57,10 @@ class DiscordWebhookSendTask extends AsyncTask {
 		curl_close($ch);
 	}
 
-	public function onCompletion(Server $server) : void {
+	public function onCompletion() : void {
 		$response = $this->getResult();
 		if(!in_array($response[1], [200, 204])){
-			$server->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
+			$this->getServer()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
 		}
 	}
 }
