@@ -35,12 +35,6 @@ use AxelFeL\CTD\Main;
 use pocketmine\scheduler\AsyncTask;
 
 class DiscordWebhookSendTask extends AsyncTask {
-	/** @var Webhook */
-	protected $webhook;
-	/** @var Message */
-	protected $message;
-        /** @var Main */
-        protected $plugin;
 
 	public function __construct(Webhook $webhook, Message $message, Main $plugin){
 		$this->webhook = $webhook;
