@@ -40,10 +40,9 @@ class DiscordWebhookSendTask extends AsyncTask {
 	/** @var Message */
 	protected $message;
 
-	public function __construct(Webhook $webhook, Message $message, Main $plugin){
+	public function __construct(Webhook $webhook, Message $message){
 		$this->webhook = $webhook;
 		$this->message = $message;
-                $this->main = $plugin;
 	}
 
 	public function onRun() : void {
