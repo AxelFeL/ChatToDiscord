@@ -35,6 +35,10 @@ use AxelFeL\CTD\Main;
 use pocketmine\scheduler\AsyncTask;
 
 class DiscordWebhookSendTask extends AsyncTask {
+        /** @var Webhook */
+	protected $webhook;
+	/** @var Message */
+	protected $message;
 
 	public function __construct(Webhook $webhook, Message $message, Main $plugin){
 		$this->webhook = $webhook;
@@ -57,7 +61,6 @@ class DiscordWebhookSendTask extends AsyncTask {
 	public function onCompletion() : void {
 		$response = $this->getResult();
 		if(!in_array($response[1], [200, 204])){
-			$this->plugin->getServer()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
 		}
 	}
 }
