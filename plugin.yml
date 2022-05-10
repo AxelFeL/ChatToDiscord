@@ -4,3 +4,4 @@ api: 4.0.0
 author: AxelFeL
 version: 1.2.0
 description: Chat on Server Sent to Discord
+depend: PurePerms
