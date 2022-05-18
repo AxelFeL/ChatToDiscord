@@ -15,6 +15,8 @@ use CortexPE\DiscordWebhookAPI\Message;
 use CortexPE\DiscordWebhookAPI\Webhook;
 use CortexPE\DiscordWebhookAPI\Embed;
 
+use _64FF00\PurePerms\PurePerms;
+
 class Main extends PluginBase implements Listener {
   
   public function onEnable() : void{
@@ -23,7 +25,7 @@ class Main extends PluginBase implements Listener {
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
   
-  public function onChat(PlayerChatEvent $ev){
+  public function onChat(PlayerChatEvent $ev): void{
     $player = $ev->getPlayer();
     $name = $player->getName();
     $msg = $ev->getMessage();
@@ -38,7 +40,7 @@ class Main extends PluginBase implements Listener {
     $web->send($mes);
   }
   
-  public function onJoin(PlayerJoinEvent $ev){
+  public function onJoin(PlayerJoinEvent $ev): void{
     $player = $ev->getPlayer();
     $name = $player->getName();
     $rank = $this->getPlayerRank($player);
@@ -52,7 +54,7 @@ class Main extends PluginBase implements Listener {
     $web->send($mes);
   }
   
-  public function onQuit(PlayerQuitEvent $ev){
+  public function onQuit(PlayerQuitEvent $ev): void{
     $player = $ev->getPlayer();
     $name = $player->getName();
     $rank = $this->getPlayerRank($player);
@@ -68,7 +70,8 @@ class Main extends PluginBase implements Listener {
   
   //Code from PurePermsScore
   public function getPlayerRank(Player $player): string{
-      $group = $this->getServer()->getPluginManager()->getPlugin("PurePerms")->getUserDataMgr()->getData($player)["group"];
+      if(!class_exists(PurePerms::class)) return "No Plugin";
+      $group = PurePerms::getInstance()->getUserDataMgr()->getData($player)["group"];
 
       return $group ?? "No Rank";
   }
